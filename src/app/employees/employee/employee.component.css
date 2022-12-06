@@ -1,0 +1,19 @@
+thead{
+    border: 1px solid black;
+}
+
+td{
+    padding: 10px;
+    border: 1px solid black;
+}
+th{
+    padding: 10px;
+    border: 1px solid black;
+}
+tr{
+    border: 1px solid black;
+}
+
+table{
+    border: 1px solid black;
+}

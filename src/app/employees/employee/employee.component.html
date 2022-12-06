@@ -1,0 +1,23 @@
+<div>
+    <table>
+            <thead>
+                <tr>
+                    <th>Employee_ID</th>
+                    <th>Employee_Name</th>
+                    <th>Employee_Salary</th>
+                    <th>Employee_Age</th>
+                    <th>Edit/Update</th>
+                </tr>
+            </thead>
+             <tbody>
+                {{console.log(user)}}
+                    <tr *ngFor="let user of user" >
+                        <td>{{user.id}}.</td>
+                        <td>{{user.employee_name}}</td>
+                        <td>{{user.employee_salary}}</td>
+                        <td>{{user.employee_age}}</td>
+                        <td><button (click) = "handleEdit(user.id)">Edit</button></td>
+                    </tr>
+            </tbody>
+    </table>
+  </div>
