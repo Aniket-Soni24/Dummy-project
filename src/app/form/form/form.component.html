@@ -1,10 +1,10 @@
-<form [formGroup]="postDataForm" >
+<form [formGroup]="postFormData" >
     <div class="main">
-        <input type="number" placeholder="Enter the Employee's ID" formControlName="Id"/><br />
-        <input type="text" placeholder="Enter the Employee's Name" formControlName="employee_Name" /><br/>
-        <input type="number" placeholder="Enter the Employee's Salary" formControlName="employee_Salary" /><br/>
-        <input type="number" placeholder="Enter the Employee's Age" formControlName="employee_Age" /><br/>
+        <input  placeholder="Enter the Employee's ID" formControlName="id"/><br />
+        <input  placeholder="Enter the Employee's Name" formControlName="employee_name" /><br/>
+        <input type="number" placeholder="Enter the Employee's Salary" formControlName="employee_salary" /><br/>
+        <input type="number" placeholder="Enter the Employee's Age" formControlName="employee_age" /><br/>
         <button (click)="handleAdd()">Add</button>
     </div>
 </form>
-{{postDataForm.value | json}}
+<!-- {{postDataForm.value | json}} -->

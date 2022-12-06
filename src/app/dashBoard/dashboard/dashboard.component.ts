@@ -11,10 +11,9 @@ export class DashboardComponent {
 constructor(private userData : UsersDataService){}
 
 ngOnInit(){
-// this.userData.dataEmitter.subscribe((value)=>{
-//    this.inputText = value
-// })
+this.userData.subject.subscribe((value)=>{
+   this.inputText = value
+})
 }
-
   inputText : any;
 }

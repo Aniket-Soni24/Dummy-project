@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersDataService } from 'src/app/services/users-data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee',
@@ -13,11 +14,18 @@ export class EmployeeComponent {
 
   ngOnInit(){
     this.user = this.userData.users();
-      this.userData.subject.subscribe({
-      next: (v:any) => {
-        this.user = v;
-      }
-    });
+    console.log('iuefuef',this.user);
+    
+    
+    this.userData.subject.subscribe({
+    next: (v:any) => {
+      this.user = Object.assign([],v);
+      console.log("v", v);
+      
+    }
+  });
+    console.log("user",this.user);
+    
    }
    handleEdit(e:any){
     console.log("edit");
