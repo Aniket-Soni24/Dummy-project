@@ -27,7 +27,17 @@ export class EmployeeComponent {
     console.log("user",this.user);
     
    }
-   handleEdit(e:any){
+   editEntries : any;
+   handleDelete(id:JSON){
     console.log("edit");
+    this.editEntries = this.userData.data.data;
+    
+    let index = this.userData.data.data.findIndex(e => e.id === Number(id));
+  
+        this.user.splice(index,1)
+        console.log(this.user);
+        
+      
   }
+
 }
