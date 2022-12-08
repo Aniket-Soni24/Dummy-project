@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup,FormControl, Validators, FormBuilder } from '@angular/forms'
+import { Validators, FormBuilder } from '@angular/forms'
 import { UsersDataService } from 'src/app/services/users-data.service';
 
 @Component({
@@ -8,27 +8,37 @@ import { UsersDataService } from 'src/app/services/users-data.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent {
-
-  //  postDataForm = new FormGroup({
-  //    id: new FormControl(''),
-  //    employee_name: new FormControl('',[Validators.required,Validators.minLength(3)]),
-  //    employee_salary: new FormControl('',[Validators.required]),
-  //    employee_age: new FormControl('',[Validators.required])
-  //  });
+  
   constructor(private userData:UsersDataService,private fb : FormBuilder){}
 
   postFormData = this.fb.group({
    id:['',[Validators.required]],
    employee_name:['',[Validators.required,Validators.minLength(3)]],
    employee_salary:[''],
-   employee_age:['']
+   employee_age:[''],
+   profile_image:['']
   })
-  // ngOnInit(){
-    
-  // }
+
+user:any;
+  ngOnInit(){
+    this.userData.editDetails.subscribe({
+      next: (v: any) => {
+        this.user = Object.assign({}, v);
+        this.postFormData.patchValue(this.user[0])
+      }
+    })
+
+    this.userData.delete.subscribe(
+      {
+        next: (v: any) => {
+          this.user = Object.assign({}, v);
+        }
+      }
+    )
+  }
+
   handleAdd(){
-    // console.log("submitted");
     this.userData.add(this.postFormData.value)    
   }
- 
+
 }
