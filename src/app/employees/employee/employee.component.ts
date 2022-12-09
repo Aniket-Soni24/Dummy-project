@@ -8,14 +8,14 @@ import { UsersDataService } from 'src/app/services/users-data.service';
 })
 export class EmployeeComponent {
   console = console;
-  user: any;
+  user:any;
   constructor(private userData: UsersDataService) { }
 
   ngOnInit() {
     this.user = this.userData.users();
 
     this.userData.subject.subscribe({
-      next: (v: any) => {
+      next: (v) => {
         this.user = Object.assign([], v);
       }
     });
