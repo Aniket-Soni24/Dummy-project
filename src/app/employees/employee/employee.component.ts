@@ -8,7 +8,8 @@ import { UsersDataService } from 'src/app/services/users-data.service';
 })
 export class EmployeeComponent {
   console = console;
-  user:any;
+  user: any;
+
   constructor(private userData: UsersDataService) { }
 
   ngOnInit() {
@@ -21,12 +22,14 @@ export class EmployeeComponent {
     });
   }
 
-  handleEdit(id: any) {    
-    this.userData.handleEdit(id)  
+  handleEdit(id: any) {
+    this.userData.handleEdit(id)
     this.handleDelete(id)
   }
 
-handleDelete(id:JSON){
-   this.userData.deleteId(id)
-}
+  handleDelete(id: any) {
+    let index = this.userData.data.data.findIndex(e => e.id == id);
+    this.userData.data.data.splice(index, 1)
+    // this.userData.deleteId(id)
+  }
 }

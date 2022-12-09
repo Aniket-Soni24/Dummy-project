@@ -22,26 +22,14 @@ user:any;
   ngOnInit(){
     this.userData.editDetails.subscribe({
       next: (v: any) => {
-        this.user = Object.assign({}, v);
+        this.user = Object.assign({},v);        
         this.postFormData.patchValue(this.user[0])
       }
     })
-
-    this.userData.delete.subscribe(
-      {
-        next: (v: any) => {
-          this.user = Object.assign({}, v);
-        }
-      }
-    )
   }
 
   handleAdd(){
     this.userData.add(this.postFormData.value)    
-  }
-
-  loginUser(){
-
   }
 
   get id(){

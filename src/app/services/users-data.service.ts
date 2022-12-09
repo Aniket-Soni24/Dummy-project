@@ -10,7 +10,6 @@ export class UsersDataService {
 
   subject = new Subject<any>();
   editDetails = new Subject<any>();
-  delete = new Subject<any>();
 
 
   constructor() { }
@@ -18,30 +17,16 @@ export class UsersDataService {
   users() {
     return this.data.data;
   }
-  add(details: any) {
+  add(details: any) {    
     this.data.data.push(details);
     this.subject.next(this.data.data)
   }
 
   editEntries: any;
   handleEdit(id: any) {
-    this.editEntries = this.data.data;
-
+   this.editEntries = this.data.data;
    let index = this.data.data.findIndex(e => e.id === Number(id))
-   this.editEntries = this.editEntries.slice(index,index+1)
-   this.editDetails.next(this.editEntries);
+   this.editEntries = this.editEntries.slice(index,index+1)   
+   this.editDetails.next(this.data.data);
   }
-
-  deleteEntries: any;
-  handleDelete(id: JSON) {    
-    this.deleteEntries = this.data.data;
-    let index = this.data.data.findIndex(e => e.id === Number(id));
-    this.data.data.splice(index, 1)
-    this.delete.next(this.deleteEntries)
-  }
-
-  deleteId(id:any){
-   this.handleDelete(id);
-  }
-
 }
