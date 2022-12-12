@@ -12,17 +12,17 @@ export class FormComponent {
   constructor(private userData:UsersDataService){}
 
   postFormData = new FormGroup({
-    id : new FormControl('',[Validators.required,Validators.pattern('^[0-9]')]),
+    id : new FormControl('',[Validators.required]),
     employee_name : new FormControl('',[Validators.required]),
     employee_salary : new FormControl('',[Validators.required]),
-    employee_age : new FormControl('',[Validators.required]) 
+    employee_age : new FormControl('',[Validators.required]) ,
   })
 
 user:any;
   ngOnInit(){
     this.userData.editDetails.subscribe({
-      next: (v: any) => {
-        this.user = Object.assign({},v);        
+      next: (v: any) => {        
+        this.user = Object.assign({},v.data);        
         this.postFormData.patchValue(this.user[0])
       }
     })
