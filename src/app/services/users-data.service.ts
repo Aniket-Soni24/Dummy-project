@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersDataService {
-  data = {
+   data = {
     status: 'success',
     data: [
       {
@@ -198,22 +198,35 @@ export class UsersDataService {
   }
 
 
-  handleEdit(id: inter): void {
+  handleEdit(id: empData): void {  //move this to app liftup state
     let obj = {
       type : 'edit',
       data : this.data.data
     }
-    let index = this.data.data.findIndex(e => e.id == Number(id));
+    let index = this.data.data.findIndex(e => e.id == Number(id));//find
     this.data.data.splice(index, index)
-    this.editDetails.next(obj);
+    this.editDetails.next(obj);//in one line 
   }
 
-  // handleEdit(id:any){
+  handle(obj:any){
+    this.data.data.forEach(e=>{
+      if(obj.id == e.id){
+        e.id = obj.id//use Object.assign
+        e.employee_name = obj.employee_name
+        e.employee_salary = obj.employee_salary
+        e.employee_age = obj.employee_age
+      }      
+    })
+    this.editDetails.next(this.data.data);
+  }
 
-  // }
+  publishData(data:empData){
+    this.subject.next(data)
+  }
+
 }
 
-interface inter  {
+interface empData  {
   id: number;
   employee_name: string;
   employee_salary: number;

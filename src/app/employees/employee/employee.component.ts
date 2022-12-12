@@ -16,20 +16,17 @@ export class EmployeeComponent {
     this.user = this.userData.users();
 
     this.userData.subject.subscribe({
-      next: (v) => {
-        console.log('v',v);
-               
+      next: (v) => {               
         this.user = Object.assign([], v.data);
       }
     });
   }
 
-  handleEdit(id: any) {
-    this.userData.handleEdit(id)
-    this.handleDelete(id)
+  handleEdit(obj: any) {
+    this.userData.handleEdit(obj)
   }
 
-  handleDelete(id: any) {
+  handleDelete(id: any) {// move in service and add filter 
     let index = this.userData.data.data.findIndex(e => e.id == id);
     this.userData.data.data.splice(index, 1)
   }

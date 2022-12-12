@@ -4,7 +4,6 @@
         <input placeholder="Enter the Employee's ID" formControlName="id" /><br />
         <span *ngIf="id && id.invalid && id.touched">invalid Id</span>
 
-
         <input placeholder="Enter the Employee's Name" formControlName="employee_name" /><br />
         <span *ngIf="employee_name && employee_name.invalid && employee_name.touched">invalid name</span>
 
@@ -15,6 +14,8 @@
         <span *ngIf="employee_age && employee_age.invalid && employee_age.touched">invalid age</span>
 
         <button [disabled]="postFormData.invalid" (click)="handleAdd()">Add</button>
+        <button [disabled]="postFormData.invalid" (click)="handleUpdate()">Update</button>
+
     </div>
 </form>
 <!-- {{postDataForm.value | json}} -->

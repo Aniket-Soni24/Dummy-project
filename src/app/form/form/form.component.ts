@@ -32,6 +32,11 @@ user:any;
     this.userData.add(this.postFormData.value)    
   }
 
+  handleUpdate(){
+    this.userData.handle(this.postFormData.value)
+    
+  }
+
   get id(){
     return this.postFormData.get('id')
   }
