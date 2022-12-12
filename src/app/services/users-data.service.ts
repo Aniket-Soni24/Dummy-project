@@ -189,21 +189,28 @@ export class UsersDataService {
     return this.data.data;
   }
   add(details: any) {
+    let obj ={
+      type:'edit',
+      data:this.data.data
+    }
     this.data.data.push(details);
-    this.subject.next(this.data.data);
+    this.subject.next(obj);
   }
 
-  editEntries: any;
+
   handleEdit(id: inter): void {
     let obj = {
       type : 'edit',
       data : this.data.data
     }
-    this.editEntries = this.data.data;
-    let index = this.data.data.findIndex((e) => e.id === Number(id));
-    this.editEntries = this.editEntries.slice(index, index + 1);
+    let index = this.data.data.findIndex(e => e.id == Number(id));
+    this.data.data.splice(index, index)
     this.editDetails.next(obj);
   }
+
+  // handleEdit(id:any){
+
+  // }
 }
 
 interface inter  {

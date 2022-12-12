@@ -17,7 +17,9 @@ export class EmployeeComponent {
 
     this.userData.subject.subscribe({
       next: (v) => {
-        this.user = Object.assign([], v);
+        console.log('v',v);
+               
+        this.user = Object.assign([], v.data);
       }
     });
   }
@@ -30,6 +32,5 @@ export class EmployeeComponent {
   handleDelete(id: any) {
     let index = this.userData.data.data.findIndex(e => e.id == id);
     this.userData.data.data.splice(index, 1)
-    // this.userData.deleteId(id)
   }
 }
