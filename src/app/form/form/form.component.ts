@@ -21,9 +21,11 @@ export class FormComponent {
 user:any;
   ngOnInit(){
     this.userData.editDetails.subscribe({
-      next: (v: any) => {        
-        this.user = Object.assign({},v.data);        
-        this.postFormData.patchValue(this.user[0])
+      next: (v: any) => {    
+        console.log('v',v);
+            
+        this.user = Object.assign({},v);        
+        this.postFormData.patchValue(this.user.data)
       }
     })
   }

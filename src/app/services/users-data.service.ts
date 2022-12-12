@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersDataService {
-   data = {
+  private data = {
     status: 'success',
     data: [
       {
@@ -182,6 +182,7 @@ export class UsersDataService {
 
   subject = new Subject<any>();
   editDetails = new Subject<any>();
+  delete = new Subject<any>();
 
   constructor() {}
 
@@ -189,44 +190,46 @@ export class UsersDataService {
     return this.data.data;
   }
   add(details: any) {
-    let obj ={
-      type:'edit',
-      data:this.data.data
-    }
+    let obj = {
+      type: 'edit',
+      data: this.data.data,
+    };
     this.data.data.push(details);
     this.subject.next(obj);
   }
 
-
-  handleEdit(id: empData): void {  //move this to app liftup state
+  handleEdit(id: empData): void {
+    //move this to app liftup state
     let obj = {
-      type : 'edit',
-      data : this.data.data
-    }
-    let index = this.data.data.findIndex(e => e.id == Number(id));//find
-    this.data.data.splice(index, index)
-    this.editDetails.next(obj);//in one line 
+      type: 'edit',
+      data: this.data.data.find(e => e.id === id.id),
+    };
+    // this.editDetails.next(this.data.data.find(e => e.id === id.id))
+    this.editDetails.next(obj)
+    
   }
 
-  handle(obj:any){
-    this.data.data.forEach(e=>{
-      if(obj.id == e.id){
-        e.id = obj.id//use Object.assign
-        e.employee_name = obj.employee_name
-        e.employee_salary = obj.employee_salary
-        e.employee_age = obj.employee_age
-      }      
-    })
+  handleDelete(id: any) {
+    this.delete.next(
+      (this.data.data = this.data.data.filter((item) => item.id !== id))
+    );
+  }
+
+  handle(obj: any) {
+    this.data.data.forEach((e) => {
+      if (obj.id == e.id) {
+        Object.assign(e, obj);
+      }
+    });
     this.editDetails.next(this.data.data);
   }
 
-  publishData(data:empData){
-    this.subject.next(data)
+  publishData(data: empData) {
+    this.subject.next(data);
   }
-
 }
 
-interface empData  {
+interface empData {
   id: number;
   employee_name: string;
   employee_salary: number;
