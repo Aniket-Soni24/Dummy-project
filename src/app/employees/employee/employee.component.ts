@@ -7,25 +7,14 @@ import { UsersDataService } from 'src/app/services/users-data.service';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent {
-  console = console;
   user: any;
 
   constructor(private userData: UsersDataService) { }
 
   ngOnInit() {
     this.user = this.userData.users();
-
     this.userData.subject.subscribe({
-      next: (v) => {    
-        console.log("v in  user", v.data);
-                   
-        this.user = Object.assign([], v.data);
-      }
-    });
-
-    this.userData.subject.subscribe({
-      next: (v) => {     
-        console.log('delete in employye',v);     
+      next: (v) => {                       
         this.user = Object.assign([], v.data);
       }
     });
@@ -38,7 +27,6 @@ export class EmployeeComponent {
 
   handleDelete(id:any){
     console.log('handle delete triggered');
-    
     this.userData.handleDelete(id)
   }
 }

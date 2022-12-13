@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-// import {empData} from '../types'
+import { empData } from '../types'
 
 @Injectable({
   providedIn: 'root',
@@ -182,8 +182,7 @@ export class UsersDataService {
   };
 
   subject = new Subject<any>();
-  // editDetails = new Subject<any>();
-  // delete = new Subject<any>();
+  empData = new Subject<any>();
 
   constructor() {}
 
@@ -191,7 +190,9 @@ export class UsersDataService {
     return this.data.data;
   }
 
-  add(details: any) {
+  add(details:any) {
+    console.log("addddd", details);
+    
     let obj = {
       type: 'add',
       data: this.data.data,
@@ -200,26 +201,31 @@ export class UsersDataService {
    this.publishData(obj);
   }
 
-  handleEdit(id: empData): void {
+  handleEdit(obj1: empData): void {
     //move this to app liftup state
     let obj = {
       type: 'edit',
-      data: this.data.data.find(e => e.id === id.id),
+      data: this.data.data.find(e => e.id === obj1.id),
     };
     // this.editDetails.next(this.data.data.find(e => e.id === id.id))
-    this.publishData(obj) 
+    this.empData.next(obj)
+     
   }
 
   handleDelete(id:number) {
+    // let index = this.data.data.findIndex(e => e.id == id);
+    //  this.data.data.splice(index, 1)
+
+    this.data.data = this.data.data.filter(item => id !== item.id )
     let obj = {
       type: 'delete',
-      data: this.data.data,
-    };
-    this.data.data = this.data.data.filter((item) => item.id !== id)
+      data: this.data.data
+    }
+    
     this.publishData(obj);
   }
 
-  handle(obj: any) {
+  handle(obj:any) {
     let obj1 = {
       type: 'handle',
       data: this.data.data,
@@ -235,12 +241,4 @@ export class UsersDataService {
   publishData(data: any) {
     return this.subject.next(data);
   }
-}
-
-interface empData {
-  id: number;
-  employee_name: string;
-  employee_salary: number;
-  employee_age: number;
-  profile_image: string;
 }

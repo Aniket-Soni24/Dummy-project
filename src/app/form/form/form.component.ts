@@ -22,7 +22,7 @@ user:any;
   ngOnInit(){
     console.warn(this.userData.subject);
     
-    this.userData.subject.subscribe({//touched
+    this.userData.empData.subscribe({//touched
       next: (v: any) => {    
         console.log('patch value in form ',v.type);
             
@@ -34,7 +34,6 @@ user:any;
 
   handleAdd(){
     console.log('handle add triggered');
-
     this.userData.add(this.postFormData.value)    
   }
 

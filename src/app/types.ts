@@ -5,3 +5,4 @@ export interface empData {
     employee_age: number;
     profile_image: string;
   }
+
