@@ -16,24 +16,29 @@ export class EmployeeComponent {
     this.user = this.userData.users();
 
     this.userData.subject.subscribe({
-      next: (v) => {               
+      next: (v) => {    
+        console.log("v in  user", v.data);
+                   
         this.user = Object.assign([], v.data);
       }
     });
 
-    this.userData.delete.subscribe({
+    this.userData.subject.subscribe({
       next: (v) => {     
-        console.log(v);     
-        this.user = Object.assign([], v);
+        console.log('delete in employye',v);     
+        this.user = Object.assign([], v.data);
       }
     });
   }
 
   handleEdit(obj: any) {
+    console.log('handle edit triggered');
     this.userData.handleEdit(obj)
   }
 
   handleDelete(id:any){
+    console.log('handle delete triggered');
+    
     this.userData.handleDelete(id)
   }
 }

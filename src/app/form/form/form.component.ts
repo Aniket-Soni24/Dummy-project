@@ -20,9 +20,11 @@ export class FormComponent {
 
 user:any;
   ngOnInit(){
-    this.userData.editDetails.subscribe({
+    console.warn(this.userData.subject);
+    
+    this.userData.subject.subscribe({//touched
       next: (v: any) => {    
-        console.log('v',v);
+        console.log('patch value in form ',v.type);
             
         this.user = Object.assign({},v);        
         this.postFormData.patchValue(this.user.data)
@@ -31,10 +33,13 @@ user:any;
   }
 
   handleAdd(){
+    console.log('handle add triggered');
+
     this.userData.add(this.postFormData.value)    
   }
 
   handleUpdate(){
+    console.log('handle update triggered');
     this.userData.handle(this.postFormData.value)
     this.postFormData.patchValue({
       id:'',

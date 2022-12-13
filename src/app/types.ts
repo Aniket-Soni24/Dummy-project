@@ -1,4 +1,4 @@
-interface inter  {
+export interface empData {
     id: number;
     employee_name: string;
     employee_salary: number;

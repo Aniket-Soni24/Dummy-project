@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
+// import {empData} from '../types'
 
 @Injectable({
   providedIn: 'root',
@@ -181,22 +182,22 @@ export class UsersDataService {
   };
 
   subject = new Subject<any>();
-  editDetails = new Subject<any>();
-  delete = new Subject<any>();
+  // editDetails = new Subject<any>();
+  // delete = new Subject<any>();
 
   constructor() {}
 
   users() {
     return this.data.data;
   }
-  
+
   add(details: any) {
     let obj = {
-      type: 'edit',
+      type: 'add',
       data: this.data.data,
     };
     this.data.data.push(details);
-    this.subject.next(obj);
+   this.publishData(obj);
   }
 
   handleEdit(id: empData): void {
@@ -206,27 +207,33 @@ export class UsersDataService {
       data: this.data.data.find(e => e.id === id.id),
     };
     // this.editDetails.next(this.data.data.find(e => e.id === id.id))
-    this.editDetails.next(obj)
-    
+    this.publishData(obj) 
   }
 
-  handleDelete(id: any) {
-    this.delete.next(
-      (this.data.data = this.data.data.filter((item) => item.id !== id))
-    );
+  handleDelete(id:number) {
+    let obj = {
+      type: 'delete',
+      data: this.data.data,
+    };
+    this.data.data = this.data.data.filter((item) => item.id !== id)
+    this.publishData(obj);
   }
 
   handle(obj: any) {
+    let obj1 = {
+      type: 'handle',
+      data: this.data.data,
+    };
     this.data.data.forEach((e) => {
       if (obj.id == e.id) {
         Object.assign(e, obj);
       }
     });
-    this.editDetails.next(this.data.data);
+    this.publishData(obj1);
   }
 
-  publishData(data: empData) {
-    this.subject.next(data);
+  publishData(data: any) {
+    return this.subject.next(data);
   }
 }
 
