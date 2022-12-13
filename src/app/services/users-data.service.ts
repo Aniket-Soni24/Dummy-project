@@ -189,6 +189,7 @@ export class UsersDataService {
   users() {
     return this.data.data;
   }
+  
   add(details: any) {
     let obj = {
       type: 'edit',

@@ -36,6 +36,12 @@ user:any;
 
   handleUpdate(){
     this.userData.handle(this.postFormData.value)
+    this.postFormData.patchValue({
+      id:'',
+      employee_name:'',
+      employee_salary:'',
+      employee_age:'',
+    })
     
   }
 
