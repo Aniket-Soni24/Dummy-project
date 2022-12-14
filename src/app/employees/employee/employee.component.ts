@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component , Output , EventEmitter} from '@angular/core';
 import { UsersDataService } from 'src/app/services/users-data.service';
+import { EmpData } from 'src/app/types';
 
 @Component({
   selector: 'app-employee',
@@ -7,26 +8,34 @@ import { UsersDataService } from 'src/app/services/users-data.service';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent {
+  data:string = 'aniket'
+
   user: any;
+  @Output() empData = new EventEmitter<any>();
 
   constructor(private userData: UsersDataService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+
+
     this.user = this.userData.users();
     this.userData.subject.subscribe({
       next: (v) => {                       
         this.user = Object.assign([], v.data);
       }
-    });
+    });    
   }
 
   handleEdit(obj: any) {
-    console.log('handle edit triggered');
     this.userData.handleEdit(obj)
   }
 
   handleDelete(id:any){
-    console.log('handle delete triggered');
     this.userData.handleDelete(id)
   }
+
+  editableData(data:EmpData){
+    this.empData.emit(data)        
+  }
+
 }

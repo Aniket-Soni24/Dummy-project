@@ -13,9 +13,8 @@
         <input type="number" placeholder="Enter the Employee's Age" formControlName="employee_age" /><br />
         <span *ngIf="employee_age && employee_age.invalid && employee_age.touched">invalid age</span>
 
-        <button [disabled]="postFormData.invalid" (click)="handleAdd()">Add</button>
-        <button [disabled]="postFormData.invalid" (click)="handleUpdate()">Update</button>
+        <button [disabled]="postFormData.invalid" class="btn-success" (click)="handleAdd()">Add</button><br/>
+        <button [disabled]="postFormData.invalid" class="btn-secondary" (click)="handleUpdate()">Update</button>
 
     </div>
 </form>
-<!-- {{postDataForm.value | json}} -->

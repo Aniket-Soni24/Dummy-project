@@ -6,8 +6,8 @@
                     <th>Employee_Name</th>
                     <th>Employee_Salary</th>
                     <th>Employee_Age</th>
-                    <th>Delete</th>
                     <th>Edit/Upgrade</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
              <tbody>
@@ -17,10 +17,11 @@
                         <td>{{user.employee_name}}</td>
                         <td>{{user.employee_salary}}</td>
                         <td>{{user.employee_age}}</td>
-                        <td><button (click) = "handleDelete(user.id)">Delete</button></td>
-                        <td><button (click) = "handleEdit(user)">Edit/Update</button></td>
-                    </tr>
+                        <td><button class='btn-primary' (click) = "handleEdit(user)">Edit/Update</button></td>
+                        <td><button class='btn-danger' (click) = "handleDelete(user.id)">Delete</button></td>
+                        <td><button class='btn-danger' (click) = "editableData(user)">Delete</button></td>
 
+                    </tr>
             </tbody>
     </table>
   </div>

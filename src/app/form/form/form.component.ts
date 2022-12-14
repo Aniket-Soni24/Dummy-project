@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Validators, FormControl,FormGroup} from '@angular/forms'
 import { UsersDataService } from 'src/app/services/users-data.service';
 
@@ -8,24 +8,25 @@ import { UsersDataService } from 'src/app/services/users-data.service';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent {
+
   
   constructor(private userData:UsersDataService){}
-
+  
   postFormData = new FormGroup({
     id : new FormControl('',[Validators.required]),
     employee_name : new FormControl('',[Validators.required]),
     employee_salary : new FormControl('',[Validators.required]),
     employee_age : new FormControl('',[Validators.required]) ,
   })
+  obj:any
 
+  @Input() data: any;
 user:any;
-  ngOnInit(){
-    console.warn(this.userData.subject);
+  ngOnInit(){  
+    console.log('data',this.data);
     
-    this.userData.empData.subscribe({//touched
-      next: (v: any) => {    
-        console.log('patch value in form ',v.type);
-            
+    this.userData.empData.subscribe({
+      next: (v: any) => {                
         this.user = Object.assign({},v);        
         this.postFormData.patchValue(this.user.data)
       }
@@ -33,20 +34,27 @@ user:any;
   }
 
   handleAdd(){
-    console.log('handle add triggered');
     this.userData.add(this.postFormData.value)    
   }
 
   handleUpdate(){
-    console.log('handle update triggered');
-    this.userData.handle(this.postFormData.value)
+    this.obj = this.postFormData.value
+    console.log(this.postFormData.value);
+    
+    this.userData.data.data.forEach((e) => {      
+      if (this.obj.id === e.id) {
+        Object.assign(e, this.obj );
+      }
+    });
+    
+    // this.userData.handle(this.postFormData.value)
+    
     this.postFormData.patchValue({
       id:'',
       employee_name:'',
       employee_salary:'',
       employee_age:'',
-    })
-    
+    }) 
   }
 
   get id(){

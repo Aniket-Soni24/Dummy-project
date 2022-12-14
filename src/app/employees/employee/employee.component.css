@@ -1,19 +1,29 @@
 thead{
     border: 1px solid black;
+    
 }
 
 td{
     padding: 10px;
     border: 1px solid black;
+    text-align: center;
 }
 th{
     padding: 10px;
     border: 1px solid black;
+    text-align: center;
+
 }
 tr{
     border: 1px solid black;
 }
 
 table{
+    margin-top: 50px;
     border: 1px solid black;
+    width: 80%;
 }
+
+tbody tr:nth-child(odd) {
+    background: #eee;
+  }

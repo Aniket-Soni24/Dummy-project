@@ -1,12 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { empData } from '../types'
+import { EmpData} from '../types'
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersDataService {
-  private data = {
+  data = {
     status: 'success',
     data: [
       {
@@ -190,9 +190,7 @@ export class UsersDataService {
     return this.data.data;
   }
 
-  add(details:any) {
-    console.log("addddd", details);
-    
+  add(details:any) {    
     let obj = {
       type: 'add',
       data: this.data.data,
@@ -201,7 +199,7 @@ export class UsersDataService {
    this.publishData(obj);
   }
 
-  handleEdit(obj1: empData): void {
+  handleEdit(obj1: EmpData): void {
     //move this to app liftup state
     let obj = {
       type: 'edit',
@@ -223,19 +221,6 @@ export class UsersDataService {
     }
     
     this.publishData(obj);
-  }
-
-  handle(obj:any) {
-    let obj1 = {
-      type: 'handle',
-      data: this.data.data,
-    };
-    this.data.data.forEach((e) => {
-      if (obj.id == e.id) {
-        Object.assign(e, obj);
-      }
-    });
-    this.publishData(obj1);
   }
 
   publishData(data: any) {
